@@ -1,0 +1,8 @@
+prefix=/home/a/catkin_ws/devel
+
+Name: get_map_data
+Description: Description of get_map_data
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib -lget_map_data
+Requires: rospy

@@ -1,0 +1,8 @@
+prefix=/home/a/catkin_ws/install
+
+Name: rito_navigation_stack
+Description: Description of rito_navigation_stack
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

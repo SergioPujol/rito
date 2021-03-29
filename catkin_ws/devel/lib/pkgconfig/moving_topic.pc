@@ -1,0 +1,8 @@
+prefix=/home/a/catkin_ws/devel
+
+Name: moving_topic
+Description: Description of moving_topic
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: rospy

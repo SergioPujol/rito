@@ -1,8 +1,0 @@
-prefix=/home/a/catkin_ws/install
-
-Name: moving_topic
-Description: Description of moving_topic
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: rospy

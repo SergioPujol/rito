@@ -1,8 +1,0 @@
-<launch>
-<node
-	pkg = "moving_topic"
-	type = "move_topic_publisher.py"
-	name = "move_topic_publisher"
-	output = "screen">
-</node>
-</launch>

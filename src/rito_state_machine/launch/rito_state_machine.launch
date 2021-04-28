@@ -1,0 +1,8 @@
+<launch>
+<node
+        pkg = "rito_state_machine"
+        type = "rito_state_machine.py"
+        name = "rito_state_machine"
+        output = "screen">
+</node>
+</launch>

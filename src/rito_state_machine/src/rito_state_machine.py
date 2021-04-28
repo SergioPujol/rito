@@ -11,7 +11,8 @@ from tf.transformations import quaternion_from_euler
 from collections import OrderedDict
 
 
-lista_tareas = ['carniceria', 'pescaderia', 'cajero']
+#lista_tareas = ['carniceria', 'pescaderia', 'cajero']
+lista_tareas = []
 
 ## Descripcion de los estados
 class PowerOnRobot(State):
@@ -186,6 +187,13 @@ class main():
     def __init__(self):
 
         rospy.init_node('move_base_action_client', anonymous=False)
+        
+        while(lista_tareas==0):  
+            with open("fichero.txt", mode="rt", encoding="utf-8") as f:
+                for linea in f:
+                    print(linea)
+                    list_tasks.append(linea)
+                    
         self.start_tasks(lista_tareas)
 
 
@@ -218,7 +226,7 @@ class main():
                         StateMachine.add(waypoints_dict[i]['function'],  waypoints_dict[i]['class'], transitions={'succeeded':waypoints_dict[list_tasks[cont]]['tag'],'aborted':'WAITING_ORDER'})
                         # En vez de Keep Clothes, es la funcion en cada caso
 
-        intro_server = IntrospectionServer('Robot_mayordomo',sm_lavar, '/SM_ROOT')
+        intro_server = IntrospectionServer('rito_machine',sm_lavar, '/SM_ROOT')
         intro_server.start()
 
         #Ejecutamos la maquina de estados

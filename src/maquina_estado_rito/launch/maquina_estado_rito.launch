@@ -1,8 +1,0 @@
-<launch>
-<node
-        pkg = "maquina_estado_rito"
-        type = "maquina_estado.py"
-        name = "maquina_estado"
-        output = "screen">
-</node>
-</launch>

@@ -12,18 +12,30 @@ const PerfilScreen = ({ navigation }) => {
                 value={text}
 
             />
-            <View></View>
-            <TouchableOpacity style={{
-                backgroundColor: colors.secondary,
-                width: '50%',
-                height: 40,
-                borderRadius: 5,
-                justifyContent: 'center',
-                alignItems: 'center',
-                ...style.shadow
-            }}>
-                <Text>CONECTAR</Text>
-            </TouchableOpacity>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '70%' }}>
+                <TouchableOpacity style={{
+                    backgroundColor: colors.secondary,
+                    width: '40%',
+                    height: 40,
+                    borderRadius: 5,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    ...style.shadow
+                }} onPress={() => { }}>
+                    <Text>CONECTAR</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{
+                    backgroundColor: colors.secondary,
+                    width: '45%',
+                    height: 40,
+                    borderRadius: 5,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    ...style.shadow
+                }} onPress={() => {}}>
+                    <Text>DESCONECTAR</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };

@@ -207,26 +207,26 @@ const RitoScreen = ({ navigation }) => {
                         <View style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'space-evenly' }}>
                             <TouchableOpacity style={{
                                 backgroundColor: colors.secondary,
-                                width: 70,
+                                width: '40%',
                                 height: 40,
                                 borderRadius: 5,
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 ...style.shadow
-                            }}>
+                            }} onPress={() => { }}>
                                 <Text>MOVER</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={{
                                     backgroundColor: colors.secondary,
-                                    width: 70,
+                                    width: '40%',
                                     height: 40,
                                     borderRadius: 5,
                                     justifyContent: 'center',
                                     alignItems: 'center',
                                     ...style.shadow,
 
-                                }}>
+                                }} onPress={() => { }}>
                                 <Text>PARAR</Text>
                             </TouchableOpacity>
                         </View>
@@ -306,6 +306,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 40,
         justifyContent: 'center'
+
     },
     headerText: {
         alignSelf: 'flex-start',

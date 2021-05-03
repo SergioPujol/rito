@@ -7,8 +7,11 @@ document.addEventListener('DOMContentLoaded', event => {
     document.getElementById("btn_backwards").addEventListener("click", backwards)
     document.getElementById("btn_start_nav").addEventListener("click", send_goal)
     document.getElementById("btn_stop_nav").addEventListener("click", cancel_goal)
+    document.getElementById("btn_state_meat").addEventListener("click", state_meat)
+    document.getElementById("btn_state_fish").addEventListener("click", state_fish)
+    document.getElementById("btn_state_pay").addEventListener("click", state_pay)
 
-    jail = false;
+    jail = false;// define the service to be called
 
     data = {
         // ros connection
@@ -60,14 +63,6 @@ document.addEventListener('DOMContentLoaded', event => {
                 data.position.y = data.position.y + 2
                 document.getElementById("pos_x").innerHTML = data.position.x.toFixed(2)
                 document.getElementById("pos_y").innerHTML = data.position.y.toFixed(2)
-                /*
-                if (jail) {
-                    if (data.position.x > 2 || data.position.y > 2)
-                        backwards()
-                    if (data.position.x < 2 || data.position.y < 2)
-                        move()
-                        
-                }*/
             })
         })
         data.ros.on("error", (error) => {
@@ -172,7 +167,63 @@ document.addEventListener('DOMContentLoaded', event => {
 
     function jailmode() {
         jail = !jail
+    }
 
+    function state_meat(){
+        let service = new ROSLIB.Service({
+            ros : data.ros,
+            name : '/activate_state',
+            serviceType : 'rossrv/Type',
+        })
+        // define the request
+        let request = new ROSLIB.ServiceRequest({
+            tasks : "carniceria",
+        }) // define a callback
+        service.callService(request, (result) => {
+            console.log('This is the response of the service ')
+            console.log(result)
+        
+        }, (error) => {
+            console.error(error)
+        })
+    }
+
+    function state_fish(){
+        let service = new ROSLIB.Service({
+            ros : data.ros,
+            name : '/activate_state',
+            serviceType : 'rossrv/Type',
+        })
+        // define the request
+        let request = new ROSLIB.ServiceRequest({
+            tasks : "pescaderia",
+        }) // define a callback
+        service.callService(request, (result) => {
+            console.log('This is the response of the service ')
+            console.log(result)
+        
+        }, (error) => {
+            console.error(error)
+        })
+    }
+
+    function state_pay(){
+        let service = new ROSLIB.Service({
+            ros : data.ros,
+            name : '/activate_state',
+            serviceType : 'rossrv/Type',
+        })
+        // define the request
+        let request = new ROSLIB.ServiceRequest({
+            tasks : "cajero",
+        }) // define a callback
+        service.callService(request, (result) => {
+            console.log('This is the response of the service ')
+            console.log(result)
+        
+        }, (error) => {
+            console.error(error)
+        })
     }
 
     function disconnect() {

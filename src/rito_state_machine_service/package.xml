@@ -18,7 +18,9 @@
   <exec_depend>std_msgs</exec_depend>
   <build_export_depend>rito_state_machine_msg</build_export_depend>
   <exec_depend>rito_state_machine_msg</exec_depend>
-
+  <build_depend>rito_state_machine</build_depend>
+  <build_export_depend>rito_state_machine</build_export_depend>
+  <exec_depend>rito_state_machine</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

@@ -6,6 +6,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   rito_state_machine_msg
+  rito_state_machine
 )
 
 ###################################
@@ -18,6 +19,7 @@ catkin_package(
    CATKIN_DEPENDS 
    rospy
    rito_state_machine_msg
+   rito_state_machine
 #  DEPENDS system_lib
 )
 

@@ -1,0 +1,20 @@
+< ?xmlversion="1.0"?>
+<package format="2">
+  <name>NOMBRE_DEL_METAPACKAGE</name>
+  <version>1.2.1</version>
+  <description> ROS packages for the XXXX (meta package)
+  </description>
+  <license>Apache 2.0</license>
+  <license>BSD</license>
+  <author email="usr@epsg.upv.es">Pyo</author>
+  <maintainer email="usr@epsg.upv.es">Pyo</maintainer>
+<url type="website">http://xxx </url>   
+<url type="repository">https://github.com/URL_DEL_REPOSITORIO</url>
+<buildtool_depend>catkin</buildtool_depend>
+  <exec_depend>rito_navigation_stack</exec_depend>
+  <exec_depend>rito_navigation_stack_real</exec_depend>
+  <exec_depend>rito_provide_map</exec_depend>
+  <exec_depend>rito_state_machine_msg</exec_depend>
+  <exec_depend>rito_state_machine_service</exec_depend>
+<export><metapackage/></export>
+</package>

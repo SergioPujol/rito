@@ -1,9 +1,6 @@
 const screenWidth= window.innerWidth
-const screenHeight= window.innerHeight
-
-const robotY = screenHeight
-const robotX = (screenWidth / 2) - 35
-
+const screenHeight= document.getElementById("map").clientHeight;
+const robotSize = 25
 const mapLength= {x: 9.2, y: 9.2}
 
 const robot= document.getElementById("robot")
@@ -54,7 +51,6 @@ function connect(ip) {
         console.log("Conexion con ROSBridge correcta")
         topic.subscribe((message) => {
             data.position = message.pose.pose.position
-            // PARA NATXO Y FUTURO EQUIPO, EN EL MUNDO REAL VARIAR=?
             topicCoords(data.position.x - 7, data.position.y + 2)
         })
     })
@@ -68,26 +64,17 @@ function connect(ip) {
     })
 }
 
-var xOffset = 500;
-var yOffset = 150;
-
 //Aquí irá la lectura del topic
 function topicCoords(x,y) {
-    //let rCoords = changeCoords({ x: x, y: y})
-    
-    console.log("TOP - " + robot.style.top)
-    
-    robot.style.top= (xOffset + x) + "px"
-    robot.style.left= (yOffset + y) + "px"
+    let rCoords = changeCoords({ x: x, y: y})
 
-   // setRobotX(rCoords.x)
-   // setRobotY(rCoords.y)
+    robot.style.top= rCoords.y + "px"
+    robot.style.left= rCoords.x + "px"
 }
 
 function changeCoords(coordGazebo) {
-        console.log(coordGazebo)
-        let nx = (screenWidth / 2) - 35 + (screenWidth - 35) * (coordGazebo.y / mapLength.y);
-        let ny = screenHeight - screenHeight * (coordGazebo.x / mapLength.x * (-1));
+        let nx = (screenWidth / 2) - robotSize + (screenWidth - robotSize) * (coordGazebo.y / mapLength.y);
+        let ny = screenHeight - (screenHeight) * (-coordGazebo.x / mapLength.x) - (robotSize * 2);
 
         return { x: nx, y: ny }
 }

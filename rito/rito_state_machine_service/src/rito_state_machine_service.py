@@ -28,6 +28,7 @@ from collections import OrderedDict
 lista_tareas = []
 
 endedRoute = False
+factura = 0
 
 ## Descripcion de los estados
 class PowerOnRobot(State):
@@ -291,12 +292,14 @@ class Scan(State):
             '''
             if(redCheck):
                 print("Escaneado producto rojo")
-                endedRoute = True        
+                endedRoute = True
+                factura += 3
                 return 'succeeded'
 
             if(blueCheck):
                 print("Escaneado producto azul")
                 endedRoute = True        
+                factura += 4
                 return 'succeeded'
                 
             if(greenCheck):
@@ -398,8 +401,10 @@ def my_callback(request): # Funcion que se ejecuta cuando se llama al servicio
     lista_tareas = destinos
     start_tasks(lista_tareas)
 
+    factura = len(destinos) * 4
     response = RitoServiceMessageResponse()
-    response.success = endedRoute
+    response.success = True
+    response.bill = "Total: "+ str(factura)
     return response    
 
 rospy.init_node('rito_state_machine_service')  # se inicializa el nodo

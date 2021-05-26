@@ -29,15 +29,15 @@ document.addEventListener('DOMContentLoaded', event => {
             status: {status: 0, text: ''},
         }    
     }
-    connect()
+    //connect()
 })
 
-function connect() {
+function connect(ip) {
 
-    //if (typeof ip === undefined || ip == "")
+    if (typeof ip === undefined || ip == "")
      data.rosbridge_address = 'ws://127.0.0.1:9090/'
-    //else data.rosbridge_address = 'ws://' + ip + "/"
-    
+    else data.rosbridge_address = 'ws://' + ip + "/"
+
     data.ros = new ROSLIB.Ros({
         url: data.rosbridge_address
     })
@@ -103,4 +103,10 @@ function send_goal(task){
     }, (error) => {
         console.error(error)
     })
+}
+
+function disconnect() {
+    data.ros.close()
+    data.connected = false
+    console.log('Clic en botón de desconexión')
 }

@@ -21,7 +21,7 @@
         crossorigin="anonymous"></script>
 
     <!-- ROSLIB -->
-     <script src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+    <script src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
 
     <!-- FONTAWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -73,7 +73,6 @@
         <!-- CARRITO Y LISTAS -->
         <img src="./Imagenes/clipboard.png" alt="" onclick="$('#shoppingList').modal();">
         <img src="./Imagenes/cancel.png" alt="" onclick="$('#cart').modal();">
-        
     </div>
 
     <!-- IMAGENES -->
@@ -96,6 +95,14 @@
         <img src="./Imagenes/pescaderia.png" alt="">
     </div>
 
+    <!-- PONER IP (SE BORRARA EN EL PROXIMO SPRINT) -->
+    <div style="position: fixed;bottom: 80px;" class="d-flex">
+        <input type="text" id="input_ip">
+        <button id="btn_con" onclick="connect(document.getElementById('input_ip').value)">Conectar</button>
+        <button id="btn_dis" onclick="disconnect()">Desconectar</button>
+    </div>
+
+    <!-- ROBOT -->
     <div class="round" id="robot"></div>
 
     <!-- MODAL LISTA -->
@@ -186,4 +193,5 @@
     <!-- JS -->
     <script src="./JS/robot_move.js"></script>
 </body>
+
 </html>

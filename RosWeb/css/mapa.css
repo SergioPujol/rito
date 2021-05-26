@@ -24,7 +24,7 @@ body{
     width: 100%;
     background-image: url(../Imagenes/map.png);
     background-repeat: no-repeat;
-    background-size: 100VW 100vh;
+    background-size: 100vw 100vh;
 }
 
 /*Elementos superiores*/

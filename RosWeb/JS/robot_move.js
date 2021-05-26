@@ -85,3 +85,22 @@ function changeCoords(coordGazebo) {
 
         return { x: nx, y: ny }
 }
+
+function send_goal(task){
+    let service = new ROSLIB.Service({
+        ros : data.ros,
+        name : '/activate_state',
+        serviceType : 'rossrv/Type',
+    })
+    // define the request
+    let request = new ROSLIB.ServiceRequest({
+        tasks : task,
+    }) // define a callback
+    service.callService(request, (result) => {
+        console.log('This is the response of the service ')
+        console.log(result)
+    
+    }, (error) => {
+        console.error(error)
+    })
+}

@@ -1,0 +1,21 @@
+/*Titulos*/
+h1 {
+    margin-top: 20px;
+}
+
+h3{
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--grey);
+    margin-left: auto;
+}
+
+h4{
+    font-size: 16px;
+}
+
+/*Listas*/
+.label{
+    margin-top: 20px;
+    box-shadow: 1px 2px 10px -3px #000000;
+}

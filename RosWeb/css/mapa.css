@@ -103,6 +103,12 @@ img{
     left: 7vw;
 }
 
+/*Robot*/
+#robot{
+    top: 75%;
+    left: 43%;
+}
+
 /*Carrito de la compra*/
 .cart{
     height: 400px;

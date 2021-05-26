@@ -6,7 +6,7 @@ const robotX = (screenWidth / 2) - 35
 
 const mapLength= {x: 9.2, y: 9.2}
 
-const robot= document.getElementById("Robot")
+const robot= document.getElementById("robot")
 
 document.addEventListener('DOMContentLoaded', event => {
 
@@ -54,6 +54,7 @@ function connect(ip) {
         console.log("Conexion con ROSBridge correcta")
         topic.subscribe((message) => {
             data.position = message.pose.pose.position
+            // PARA NATXO Y FUTURO EQUIPO, EN EL MUNDO REAL VARIAR=?
             topicCoords(data.position.x - 7, data.position.y + 2)
         })
     })
@@ -67,15 +68,20 @@ function connect(ip) {
     })
 }
 
+var xOffset = 500;
+var yOffset = 150;
+
 //Aquí irá la lectura del topic
 function topicCoords(x,y) {
-    let rCoords = changeCoords({ x: x, y: y})
+    //let rCoords = changeCoords({ x: x, y: y})
+    
+    console.log("TOP - " + robot.style.top)
+    
+    robot.style.top= (xOffset + x) + "px"
+    robot.style.left= (yOffset + y) + "px"
 
-    robot.style.top= rCoords.x
-    robot.style.left= rCoords.y
-
-    setRobotX(rCoords.x)
-    setRobotY(rCoords.y)
+   // setRobotX(rCoords.x)
+   // setRobotY(rCoords.y)
 }
 
 function changeCoords(coordGazebo) {
@@ -86,7 +92,7 @@ function changeCoords(coordGazebo) {
         return { x: nx, y: ny }
 }
 
-function send_goal(task){
+function sendGoal(task){
     let service = new ROSLIB.Service({
         ros : data.ros,
         name : '/activate_state',

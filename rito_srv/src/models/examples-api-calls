@@ -1,0 +1,62 @@
+
+POST /products
+
+{
+"name": "Sepia",
+"description":"Sepia fresca traída del norte de Malasia!",
+"brand": "PescaNova",
+"weight": 400,
+"price": 2.99,
+"stock": 563,
+"category":"pescaderia",
+"img_url": "img/sepia.jpg",
+"expiration_date": "2022-05-01"
+}
+
+
+POST /user
+
+{
+"email":"nnatxolmao@gmail.com",
+"password": "lmao",
+"username":"ign",
+"name":"Ignasi",
+"surname":"Mari Giner",
+"telephone":"639856112"
+}
+
+POST /authentication
+
+{
+"strategy":"local",
+"email":"nnatxo@gmail.com",
+"password": "lmao"
+}
+
+POST /lists
+
+{"title":"Un pescado",
+"owner": "60aefa3de9c96338878fe2e4",
+"products":[{"product":"60aefd09e9c96338878fe2ea", "quantity": 1, "added_by":"60aefa3de9c96338878fe2e4", "in_cart":false}],
+"members":[ {"user_id":"60aefa3de9c96338878fe2e4"}, 
+            {"user_id":"60aef913e9c96338878fe2e0"}]
+}
+
+GET /users?email=nnatxo@gmail.com 
+ejemplo query
+
+POST /ritos
+{
+"ip_local":"192.168.1.13",
+"supermercado":"Mercadona Gandia Playa"
+}
+
+
+POST /cart 
+{
+"rito":"60ad396c536c352224d1be33",
+"user":"60ad021c87666e57dc90c50e",
+"products":[{"product":"60ad0d8ba295a6594819028e", "quantity": 2, "in_cart":false}],
+"paid":false
+}
+

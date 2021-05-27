@@ -29,6 +29,11 @@
 
     <!-- JS -->
     <script src="./JS/search.js"></script>
+    <script src="./JS/const.js"></script>
+    
+    <!-- FEATHERS JS (Server) -->
+    <script src="//unpkg.com/feathers-client@^2.0.0/dist/feathers.js"></script>
+    <script src="//unpkg.com/socket.io-client@1.7.3/dist/socket.io.js"></script>
 
 </head>
 
@@ -73,7 +78,8 @@
     </nav>
 
     <!-- LISTAS -->
-    <ul>
+    <ul id="list-list">
+        <!-- 
         <li class="label white" data-toggle="Compra general">
             <div class="d-flex product">
                 <h3>Compra general</h3>
@@ -104,6 +110,7 @@
                 <h3>15.63€</h3>
             </div>
         </li>
+        -->
     </ul>
 
     <!-- CREAR LISTAS -->
@@ -163,6 +170,8 @@
         </div>
     </div>
 
+    <script src="./JS/login.js"></script>
+    <script src="./JS/listas.js"></script>
 </body>
 
 </html>

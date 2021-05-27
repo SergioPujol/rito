@@ -1,3 +1,5 @@
+
+
 const screenWidth= window.innerWidth
 const screenHeight= document.getElementById("map").clientHeight;
 const robotSize = 25
@@ -6,6 +8,7 @@ const mapLength= {x: 9.2, y: 9.2}
 const robot= document.getElementById("robot")
 
 document.addEventListener('DOMContentLoaded', event => {
+    login().then((a)=>{console.log(a);getList()});
 
     jail = false;// define the service to be called
 
@@ -28,9 +31,99 @@ document.addEventListener('DOMContentLoaded', event => {
     }
     //connect()
 })
+async function getList(){
+    const listsService = feathersClient.service('lists')
+    let userShoppingLists = await listsService.find();
+    let listsList = document.querySelector('#list-list');
+    listsList.innerHTML = '';
+    userShoppingLists.data.forEach(async element => {
+        let id = (element._id)
+        let price = 0;
+        
+        
+        /*await Promise.all(element.products.map(async (i) => {
+            await fetch(`http://localhost:3030/products/${i.product}`)
+            .then(response => response.json())
+            .then(data => {price += data.price;}
+            )
+        }));*/
 
+        let listaHTML = `
+        <li class="form-check">
+            <input class="form-check-input" type="checkbox" id="${id.toString()}">
+            <label class="form-check-label" for="${id.toString()}">${element.title}</label>
+        </li>
+        `
+        listsList.innerHTML += listaHTML;
+        /*document.querySelector(`#dlt-${id}`).addEventListener('click', e =>{
+            deleteList(e.target.id.slice(4))
+        })*/
+        
+    });
+}
+
+
+
+async function startShopping(){
+    const listsService = feathersClient.service('lists')
+    
+    let placesToGo = []
+    let checkboxes = document.querySelectorAll('input[type="checkbox"]:checked')
+    let stringPlacesToGo=''
+    /*
+    await checkboxes.forEach(async checkbox =>{
+        //console.log(checkbox.id)
+        let selectedLists = await listsService.get(checkbox.id.toString(),{});
+        
+        await Promise.all(selectedLists.products.map(async (i) => {
+            await fetch(`http://localhost:3030/products/${i.product}`)
+            .then(response => response.json())
+            .then(data => {
+                
+                if(data.category){
+                    if(!placesToGo.includes(data.category))
+                        placesToGo.push(data.category)
+                        stringPlacesToGo += data.category+",";
+                }
+            })
+        }));
+    })
+    */
+    for(var i = 0; i < checkboxes.length; i++){
+        //console.log(checkbox.id)
+        let selectedLists = await listsService.get(checkboxes[i].id.toString(),{});
+        await Promise.all(selectedLists.products.map(async (i) => {
+            await fetch(`http://${SERVER_IP}:${SERVER_PORT}/products/${i.product}`)
+            .then(response => response.json())
+            .then(data => {
+                if(data.category){
+                    if(!placesToGo.includes(data.category))
+                        placesToGo.push(data.category)
+                        if(!stringPlacesToGo.includes(data.category)){
+
+                            stringPlacesToGo += data.category+",";
+                        }
+                }
+            })
+        }));
+    }
+    
+    /*
+    let isConnected = false;
+    if(!isConnected){
+        connect(getIPfromInput())
+    }
+    */
+    
+    console.log(stringPlacesToGo.slice(0,-1)) //carniceria | pescaderia | carniceria, pescaderia
+    //sendGoal(stringPlacesToGo.slice(0,-1)) 
+    
+}
+
+function getIPfromInput(){
+    return document.getElementById('input_ip').value;
+}
 function connect(ip) {
-
     if (typeof ip === undefined || ip == "")
      data.rosbridge_address = 'ws://127.0.0.1:9090/'
     else data.rosbridge_address = 'ws://' + ip + "/"

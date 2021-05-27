@@ -29,6 +29,12 @@
 
   <!-- JS -->
   <script src="./JS/search.js"></script>
+  <script src="./JS/const.js"></script>
+  
+
+  <!-- FEATHERS JS (Server) -->
+  <script src="//unpkg.com/feathers-client@^2.0.0/dist/feathers.js"></script>
+  <script src="//unpkg.com/socket.io-client@1.7.3/dist/socket.io.js"></script>
 
 </head>
 
@@ -100,7 +106,8 @@
       <h1>Productos destacados</h1>
       <a href="#">Ver todos</a>
     </div>
-    <ul>
+    <ul id="product-list">
+      <!-- 
       <li class="align-items-center product-list" data-toggle="Pasta Donna Vera">
         <div class="row">
           <div class="col-4">
@@ -148,8 +155,12 @@
           </article>
         </div>
       </li>
+      -->
     </ul>
   </section>
+
+  <script src="./JS/index.js"></script>
+  <script src="./JS/login.js"></script>
 </body>
 
 </html>

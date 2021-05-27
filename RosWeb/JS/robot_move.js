@@ -108,15 +108,15 @@ async function startShopping(){
         }));
     }
     
-    /*
+    
     let isConnected = false;
     if(!isConnected){
         connect(getIPfromInput())
     }
-    */
+    
     
     console.log(stringPlacesToGo.slice(0,-1)) //carniceria | pescaderia | carniceria, pescaderia
-    //sendGoal(stringPlacesToGo.slice(0,-1)) 
+    sendGoal(stringPlacesToGo.slice(0,-1)) 
     
 }
 

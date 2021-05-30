@@ -25,6 +25,8 @@
   <!-- AMCL -->
   <include file="$(find turtlebot3_navigation)/launch/amcl.launch"/>
 
+  <!-- State machines -->
+  <include file="$(find rito_state_machine_service)/launch/rito_state_machine_service.launch"> </include>
   <!-- move_base -->
 
   <!-- Arguments -->

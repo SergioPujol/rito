@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa</title>
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <!-- ROSLIB -->
+    <script src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+
+    <!-- FONTAWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/global.css">
+    <link rel="stylesheet" href="./css/mapa.css">
+
+    
+    <!-- FEATHERS JS (Server) -->
+    <script src="//unpkg.com/feathers-client@^2.0.0/dist/feathers.js"></script>
+    <script src="//unpkg.com/socket.io-client@1.7.3/dist/socket.io.js"></script>
+    
+    <script src="./JS/const.js"></script>
+
+<body>
+
+    <!-- MENU INFERIOR -->
+    <nav class="navbar fixed-bottom navbar-light">
+        <a class="navbar-brand" href="./index.html">
+            <div>
+                <img src="./Imagenes/home.png" alt="">
+                <p>Inicio</p>
+            </div>
+        </a>
+        <a class="navbar-brand active">
+            <div>
+                <img src="./Imagenes/navigator.png" alt="">
+                <p>Mapa</p>
+            </div>
+        </a>
+        <a class="navbar-brand" href="./listas.html">
+            <div>
+                <img src="./Imagenes/clipboard.png" alt="">
+                <p>Listas</p>
+            </div>
+        </a>
+        <a class="navbar-brand" href="./perfil.html">
+            <div>
+                <img src="./Imagenes/user.png" alt="">
+                <p>Perfil</p>
+            </div>
+        </a>
+    </nav>
+
+    <!-- MENU SUPERIOR -->
+    <div id="container" class="d-flex">
+        <!-- BUSCADOR -->
+        <nav class="search">
+            <div class="d-flex">
+                <button><i class="fa fa-search"></i></button></i>
+                <input type="text" placeholder="Buscar producto..." name="search">
+            </div>
+        </nav>
+
+        <!-- CARRITO Y LISTAS -->
+        <img src="./Imagenes/clipboard.png" alt="" onclick="$('#shoppingList').modal();">
+        <img src="./Imagenes/cancel.png" alt="" onclick="$('#cart').modal();">
+    </div>
+
+    <!-- IMAGENES -->
+    <div class="round alcohol">
+        <img src="./Imagenes/carga.png" alt="">
+    </div>
+    <div class="round cash-register">
+        <img src="./Imagenes/caja_registradora.png" alt="">
+    </div>
+    <div class="round meat" onclick="sendGoal('carniceria')">
+        <img src="./Imagenes/carne.png" alt="">
+    </div>
+    <div class="round cereal">
+        <img src="./Imagenes/cereal.png" alt="">
+    </div>
+    <div class="round fruit">
+        <img src="./Imagenes/fruta.png" alt="">
+    </div>
+    <div class="round fish" onclick="sendGoal('pescaderia')">
+        <img src="./Imagenes/pescaderia.png" alt="">
+    </div>
+
+    <!-- PONER IP (SE BORRARA EN EL PROXIMO SPRINT) -->
+    <div style="position: fixed;bottom: 80px;" class="d-flex">
+        <input type="text" id="input_ip">
+        <button id="btn_con" onclick="connect(document.getElementById('input_ip').value)">Conectar</button>
+        <button id="btn_dis" onclick="disconnect()">Desconectar</button>
+    </div>
+
+    <!-- ROBOT -->
+    <div id="map">
+        <img src="./Imagenes/robotic.png" id="robot"></img>
+    </div>
+
+    <!-- MODAL LISTA -->
+    <div class="modal fade" id="shoppingList" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body shopping">
+                    <h1>Selecciona tu lista de la compra</h1>
+                    <ul id="list-list">
+                        <!--
+                        <li class="form-check">
+                            <input class="form-check-input" type="checkbox" id="paella">
+                            <label class="form-check-label" for="paella">Para paella</label>
+                        </li>
+                        <li class="form-check">
+                            <input class="form-check-input" type="checkbox" id="puchero">
+                            <label class="form-check-label" for="puchero">Puchero de la abuela</label>
+                        </li>
+                        <li class="form-check">
+                            <input class="form-check-input" type="checkbox" id="pizza">
+                            <label class="form-check-label" for="pizza">Pizza</label>
+                        </li>
+                        <li class="form-check">
+                            <input class="form-check-input" type="checkbox" id="compra">
+                            <label class="form-check-label" for="compra">Compra general</label>
+                        </li>
+                        <li class="form-check">
+                            <input class="form-check-input" type="checkbox" id="compra">
+                            <label class="form-check-label" for="compra">Compra general</label>
+                        </li>
+                        -->
+                    </ul>
+                    <div onclick="startShopping()" class="d-flex justify-content-center label yellow">
+                        <h2>Empezar Compra</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CARRITO -->
+    <div class="modal fade" id="cart" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body cart">
+                    <h1>Carrito de la compra</h1>
+                    <h3>2 productos</h3>
+                    <hr>
+                    <ul>
+                        <li class="d-flex align-items-center product-list">
+                            <div class="col-4">
+                                <img src="" alt="">
+                            </div>
+                            <article class="col-8">
+                                <h4>Pasta Donna Vera</h4>
+                                <h5>450g</h5>
+                                <div class="d-flex product-price">
+                                    <h5>1 x</h5>
+                                    <h5>2.96€</h5>
+                                </div>
+                            </article>
+                        </li>
+                        <hr>
+                        <li class="d-flex align-items-center product-list">
+                            <div class="col-4">
+                                <img src="" alt="">
+                            </div>
+                            <article class="col-8">
+                                <h4>Pasta Donna Vera</h4>
+                                <h5>450g</h5>
+                                <div class="d-flex product-price">
+                                    <h5>1 x</h5>
+                                    <h5>2.96€</h5>
+                                </div>
+                            </article>
+                        </li>
+                        <hr>
+                    </ul>
+                    <div class="d-flex justify-content-end">
+                        <article class="col-8 d-flex justify-content-between">
+                            <h5>Total</h5>
+                            <h4>79.01€</h4>
+                        </article>
+                    </div>
+                    <div class="d-flex justify-content-center label yellow">
+                        <h2>Finalizar compra</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS -->
+    
+    <script src="./JS/login.js"></script>
+    <script src="./JS/robot_move.js"></script>
+</body>
+
+</html>

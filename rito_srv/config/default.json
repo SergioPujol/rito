@@ -1,0 +1,33 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 100,
+    "max": 500
+  },
+  "authentication": {
+    "entity": "user",
+    "service": "users",
+    "secret": "2qer7EohcKVR3dCIuzmMXqlvqvw=",
+    "authStrategies": [
+      "jwt",
+      "local"
+    ],
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "issuer": "rito",
+      "algorithm": "HS256",
+      "expiresIn": "5d"
+    },
+    "local": {
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  },
+  "mongodb": "mongodb://localhost:27017/rito_srv"
+}
+

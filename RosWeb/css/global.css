@@ -1,0 +1,156 @@
+/*Colores*/
+:root {
+    --green: #00B185;
+    --yellow: #FAC001;
+    --grey: #757575;
+}
+
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(../Fuentes/Comfortaa-VariableFont_wght.ttf);
+}
+
+body {
+    width: 85%;
+    margin: 0 auto;
+    margin-bottom: 85px;
+    font-family: 'Comfortaa';
+}
+
+/*Titulos*/
+h1 {
+    font-size: 18px;
+}
+
+h2{
+    font-size: 18px;
+    color: white;
+}
+
+/*Barra navegación*/
+.navbar-light{
+    border-top: 1px solid lightgrey;
+    background: white;
+    justify-content: space-evenly;
+}
+
+.navbar-light a{
+    width: 20%;
+    padding: 0;
+    margin:0 auto;
+	text-align: center;
+}
+
+.navbar-light p{
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.navbar-light img{
+    width: 35px;
+    margin-bottom: 4px;
+}
+
+/*Buscador*/
+.search{
+    margin-top: 20px;
+}
+
+.search div{
+    height: 40px;
+    border-radius: 13px;
+    border: 1px solid lightgrey;
+    background: white;
+}
+
+.search button{
+    width: 10%;
+    border: none;
+    background: none;
+    box-shadow: none !important;
+    outline: none;
+}
+
+.search i{
+    color:lightgrey;
+}
+
+.search input{
+    width: 90%;
+    border: none;
+    box-shadow: none !important;
+    outline: none;
+}
+
+/*Etiqueta*/
+.label{
+    border-radius: 13px;
+    box-shadow: 1px 4px 10px -3px #000000;
+    padding: 20px;
+}
+
+.white{
+    background-color: white;
+}
+
+.yellow{
+    background-color: var(--yellow);
+}
+
+.grey{
+    background-color: lightgrey;
+}
+
+/*Modal*/
+.modal{
+    bottom: 77px;
+}
+
+.modal-backdrop{
+    margin-bottom: 77px;
+}
+
+.modal-dialog{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    margin: 0;
+}
+
+.modal-content{
+    margin-bottom: 77px;
+    border: none;
+    border-radius: 0px;
+    border-top-left-radius: 13px;
+    border-top-right-radius: 13px;
+}
+
+.modal-body{
+    width: 85%;
+    margin: 0 auto;
+    overflow: auto;
+}
+
+.modal.fade .modal-dialog{
+    transform: translate(0,77px);
+}
+
+.modal.show .modal-dialog {
+    -webkit-transform: translate(0,0);
+    transform: translate(0,0);
+}
+
+/*Cambios en elementos*/
+ul{
+    padding: 0px;
+    list-style-type: none;
+}
+
+article{
+    padding: 0px !important;
+}
+
+hr{
+    border-top: 2px solid lightgrey;
+}

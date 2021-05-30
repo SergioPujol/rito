@@ -1,2 +1,2 @@
-const SERVER_IP = "localhost"
+const SERVER_IP = "192.168.43.242"
 const SERVER_PORT = "3030"

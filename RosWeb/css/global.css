@@ -98,6 +98,10 @@ h2{
     background-color: var(--yellow);
 }
 
+.green{
+    background-color: var(--green);
+}
+
 .grey{
     background-color: lightgrey;
 }

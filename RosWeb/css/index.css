@@ -76,6 +76,12 @@ section .btn{
     font-weight: bold;
 }
 
+#popup {
+    top: auto;
+    bottom: 10px;
+    outline: none;
+  }
+
 /*Lista de productos*/
 ul{
     margin-top: 10px;

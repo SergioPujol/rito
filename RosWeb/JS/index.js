@@ -6,6 +6,15 @@ fetch(`http://${SERVER_IP}:${SERVER_PORT}/products`)
     })
 );
 
+function showPopup(){
+      $("#popup").modal();
+}
+
+function pairDevice(){
+  // Complete code
+}
+
+
 /*
 var socket = io('http://localhost:3030', {transports: ['websocket']});
 // feathers-client is exposed as the `feathers` global.

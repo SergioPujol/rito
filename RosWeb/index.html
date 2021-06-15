@@ -67,7 +67,21 @@
       </div>
     </a>
   </nav>
-
+  <div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Vincula a Rito!</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <label for="pin">PIN: </label> 
+              <input type="text" id="pin" name="pin"><br><br>
+              <button type="button" onclick="pairDevice()" class="btn btn-outline-success white" style="width: 100%;">Enlazar</button>
+            </div>
+        </div>
+    </div>
+</div>
   <!-- BUSCADOR -->
   <nav class="search">
     <div class="d-flex">
@@ -75,6 +89,16 @@
       <input type="text" placeholder="Buscar producto..." name="search" oninput="search(this.value)">
     </div>
   </nav>
+
+  <section>
+    <h1>Conecte su dispositivo</h1>
+    <div class="d-flex align-items-center label green">
+      <div class="col-4">
+        <div class="circle"><img src="Imagenes/carrito.png" alt="carrito" height="45" width="45"/></div>
+      </div>
+      <button type="button" onclick="showPopup()" class="btn btn-outline-success white">Vincular carrito</button>
+    </div>
+  </section>
 
   <!-- PLANIFICADOR COMPRA -->
   <section>

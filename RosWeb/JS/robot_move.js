@@ -7,30 +7,39 @@ const mapLength= {x: 9.2, y: 9.2}
 
 const robot= document.getElementById("robot")
 
+var ipReady = false
+
 document.addEventListener('DOMContentLoaded', event => {
     login().then((a)=>{console.log(a);getList()});
 
     jail = false;// define the service to be called
 
-    data = {
-        // ros connection
-        ros: null,
-        rosbridge_address: 'ws://127.0.0.1:9090/',
-        connected:  false,
-        // action information
-        goal: null,
-        action : {
-            goal: {position: {x: 0, y: 0} },
-            feedback: { 
-            position:  {x: 0, y: 0},
-                state: ''
-            },
-            result: {success: false},
-            status: {status: 0, text: ''},
-        }    
+    let ip = getCookie("connection");
+
+    if(ip != "" && ip != "null") ipReady = true
+
+    if(ipReady){
+        data = {
+            // ros connection
+            ros: null,
+            rosbridge_address: 'ws://' + ip + "/",
+            connected:  false,
+            // action information
+            goal: null,
+            action : {
+                goal: {position: {x: 0, y: 0} },
+                feedback: { 
+                position:  {x: 0, y: 0},
+                    state: ''
+                },
+                result: {success: false},
+                status: {status: 0, text: ''},
+            }    
+        }
+        connect()
     }
-    //connect()
 })
+
 async function getList(){
     const listsService = feathersClient.service('lists')
     let userShoppingLists = await listsService.find();

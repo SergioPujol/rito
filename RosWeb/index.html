@@ -31,6 +31,8 @@
   <script src="./JS/search.js"></script>
   <script src="./JS/const.js"></script>
   
+  <!-- RosLIB -->
+  <script src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
 
   <!-- FEATHERS JS (Server) -->
   <script src="//unpkg.com/feathers-client@^2.0.0/dist/feathers.js"></script>
@@ -67,6 +69,8 @@
       </div>
     </a>
   </nav>
+
+  <!-- POPUP VINCULACIÓN -->
   <div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -75,13 +79,18 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
             <div class="modal-body">
-              <label for="pin">PIN: </label> 
-              <input type="text" id="pin" name="pin"><br><br>
-              <button type="button" onclick="pairDevice()" class="btn btn-outline-success white" style="width: 100%;">Enlazar</button>
+              <div class="d-flex flex-row">
+              <label for="pin" class="m-1">PIN: </label> 
+              <input type="text" id="pin" name="pin" placeholder="0000" maxlength="4" class="w-75 m-1"/>
+              <img src="Imagenes/red.png" class="m-1" alt="Verificacion" id="status" height="25" width="25">
+            </div>
+              <br><br>
+              <button type="button" onclick="pairDevice()" class="btn btn-outline-success" style="width: 100%;">Enlazar</button>
             </div>
         </div>
     </div>
 </div>
+
   <!-- BUSCADOR -->
   <nav class="search">
     <div class="d-flex">
@@ -183,6 +192,7 @@
     </ul>
   </section>
 
+  <script src="./JS/robot.js"></script>
   <script src="./JS/index.js"></script>
   <script src="./JS/login.js"></script>
 </body>

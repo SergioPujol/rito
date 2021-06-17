@@ -1,0 +1,193 @@
+[{
+  "_id": {
+    "$oid": "60aefdf9e9c96338878fe2eb"
+  },
+  "title": "Un pescado",
+  "owner": {
+    "$oid": "60aefa3de9c96338878fe2e4"
+  },
+  "products": [
+    {
+      "_id": {
+        "$oid": "60aefdf9e9c96338878fe2ec"
+      },
+      "product": {
+        "$oid": "60aefd09e9c96338878fe2ea"
+      },
+      "quantity": 1,
+      "added_by": {
+        "$oid": "60aefa3de9c96338878fe2e4"
+      },
+      "in_cart": false
+    }
+  ],
+  "members": [
+    {
+      "_id": {
+        "$oid": "60aefdf9e9c96338878fe2ed"
+      },
+      "user_id": {
+        "$oid": "60aefa3de9c96338878fe2e4"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60aefdf9e9c96338878fe2ee"
+      },
+      "user_id": {
+        "$oid": "60aef913e9c96338878fe2e0"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2021-05-27T02:03:37.748Z"
+  },
+  "updatedAt": {
+    "$date": "2021-05-27T02:03:37.748Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60af0256e9c96338878fe33f"
+  },
+  "title": "Un trozo de carne",
+  "owner": {
+    "$oid": "60aefa3de9c96338878fe2e4"
+  },
+  "products": [
+    {
+      "_id": {
+        "$oid": "60af0256e9c96338878fe340"
+      },
+      "product": {
+        "$oid": "60aefcede9c96338878fe2e9"
+      },
+      "quantity": 1,
+      "added_by": {
+        "$oid": "60aefa3de9c96338878fe2e4"
+      },
+      "in_cart": false
+    }
+  ],
+  "members": [
+    {
+      "_id": {
+        "$oid": "60af0256e9c96338878fe341"
+      },
+      "user_id": {
+        "$oid": "60aefa3de9c96338878fe2e4"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60af0256e9c96338878fe342"
+      },
+      "user_id": {
+        "$oid": "60aef913e9c96338878fe2e0"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2021-05-27T02:22:14.636Z"
+  },
+  "updatedAt": {
+    "$date": "2021-05-27T02:22:14.636Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60af03b5e9c96338878fe3b7"
+  },
+  "title": "DEMO 3",
+  "owner": {
+    "$oid": "60aefa3de9c96338878fe2e4"
+  },
+  "products": [
+    {
+      "_id": {
+        "$oid": "60af03b5e9c96338878fe3b8"
+      },
+      "product": {
+        "$oid": "60aefcede9c96338878fe2e9"
+      },
+      "quantity": 1,
+      "added_by": {
+        "$oid": "60aefa3de9c96338878fe2e4"
+      },
+      "in_cart": false
+    }
+  ],
+  "members": [
+    {
+      "_id": {
+        "$oid": "60af03b5e9c96338878fe3b9"
+      },
+      "user_id": {
+        "$oid": "60aefa3de9c96338878fe2e4"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60af03b5e9c96338878fe3ba"
+      },
+      "user_id": {
+        "$oid": "60aef913e9c96338878fe2e0"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2021-05-27T02:28:05.932Z"
+  },
+  "updatedAt": {
+    "$date": "2021-05-27T02:28:05.932Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60af03b6e9c96338878fe3bb"
+  },
+  "title": "DEMO 3",
+  "owner": {
+    "$oid": "60aefa3de9c96338878fe2e4"
+  },
+  "products": [
+    {
+      "_id": {
+        "$oid": "60af03b6e9c96338878fe3bc"
+      },
+      "product": {
+        "$oid": "60aefcede9c96338878fe2e9"
+      },
+      "quantity": 1,
+      "added_by": {
+        "$oid": "60aefa3de9c96338878fe2e4"
+      },
+      "in_cart": false
+    }
+  ],
+  "members": [
+    {
+      "_id": {
+        "$oid": "60af03b6e9c96338878fe3bd"
+      },
+      "user_id": {
+        "$oid": "60aefa3de9c96338878fe2e4"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60af03b6e9c96338878fe3be"
+      },
+      "user_id": {
+        "$oid": "60aef913e9c96338878fe2e0"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2021-05-27T02:28:06.838Z"
+  },
+  "updatedAt": {
+    "$date": "2021-05-27T02:28:06.838Z"
+  },
+  "__v": 0
+}]

@@ -14,7 +14,9 @@ document.addEventListener('DOMContentLoaded', event => {
 
     let ip = getCookie("connection");
 
-    if(ip != "" && ip != "null") ipReady = true
+    if(ip != undefined) ipReady = true
+
+    console.log(ip)
 
     if(ipReady){
         data = {
@@ -34,7 +36,7 @@ document.addEventListener('DOMContentLoaded', event => {
                 status: {status: 0, text: ''},
             }    
         }
-        connect()
+        connect(ip)
     }
 })
 
@@ -131,9 +133,10 @@ function getIPfromInput(){
     return document.getElementById('input_ip').value;
 }
 function connect(ip) {
+    console.log("L - " + ip)
     if (typeof ip === undefined || ip == "")
      data.rosbridge_address = 'ws://127.0.0.1:9090/'
-    else data.rosbridge_address = 'ws://' + ip + "/"
+    else data.rosbridge_address = 'ws://' + ip + ":9090/"
 
     data.ros = new ROSLIB.Ros({
         url: data.rosbridge_address

@@ -45,14 +45,12 @@ console.log(data.rosbridge_address)
     data.ros.on("error", (error) => {
         console.log("Se ha producido algun error mientras se intentaba realizar la conexion")
         $("#status").attr("src", "Imagenes/yellow.png");
-        document.cookie = "connection=null"       
         console.log(error)
     })
     data.ros.on("close", () => {
         data.connected = false
         console.log("Conexion con ROSBridge cerrada")
         $("#status").attr("src", "Imagenes/red.png");
-        document.cookie = "connection=null"   
     })
 }
 

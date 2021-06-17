@@ -28,7 +28,6 @@ from collections import OrderedDict
 lista_tareas = []
 
 endedRoute = False
-factura = 0
 
 ## Descripcion de los estados
 class PowerOnRobot(State):
@@ -293,13 +292,11 @@ class Scan(State):
             if(redCheck):
                 print("Escaneado producto rojo")
                 endedRoute = True
-                factura += 3
                 return 'succeeded'
 
             if(blueCheck):
                 print("Escaneado producto azul")
-                endedRoute = True        
-                factura += 4
+                endedRoute = True 
                 return 'succeeded'
                 
             if(greenCheck):

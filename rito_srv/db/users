@@ -1,0 +1,52 @@
+[{
+  "_id": {
+    "$oid": "60aef913e9c96338878fe2e0"
+  },
+  "email": "nnatxolmao@gmail.com",
+  "password": "$2a$10$/oKEeVp.PB.P8eL9Znxyyu9.4eIVAusi/qgPTwWqrxc1adRPbY7li",
+  "username": "ign",
+  "name": "Ignasi",
+  "surname": "Mari Giner",
+  "telephone": "639856112",
+  "createdAt": {
+    "$date": "2021-05-27T01:42:43.608Z"
+  },
+  "updatedAt": {
+    "$date": "2021-05-27T01:42:43.608Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60aef93ce9c96338878fe2e2"
+  },
+  "email": "marolca@gmail.com",
+  "password": "$2a$10$drehyFjaAi3Mbrq1SMuPB.cOurTLbrpRmRf5Rdaw8gh4G8cRg8fga",
+  "username": "marolca",
+  "name": "Marc",
+  "surname": "Oller",
+  "telephone": "633421112",
+  "createdAt": {
+    "$date": "2021-05-27T01:43:24.388Z"
+  },
+  "updatedAt": {
+    "$date": "2021-05-27T01:43:24.388Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60aefa3de9c96338878fe2e4"
+  },
+  "email": "nnatxo@gmail.com",
+  "password": "$2a$10$8ey7HGpOtE36xOhXAqd61u94y.zXaKzNbLI1ksWYFeU59hZuWoq3S",
+  "username": "ignasi",
+  "name": "Ignasi",
+  "surname": "Mari Giner",
+  "telephone": "+34639856112",
+  "createdAt": {
+    "$date": "2021-05-27T01:47:41.984Z"
+  },
+  "updatedAt": {
+    "$date": "2021-05-27T01:47:41.984Z"
+  },
+  "__v": 0
+}]

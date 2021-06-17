@@ -1,5 +1,3 @@
-
-
 const screenWidth= window.innerWidth
 const screenHeight= document.getElementById("map").clientHeight;
 const robotSize = 25

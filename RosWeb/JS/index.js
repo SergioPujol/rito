@@ -1,19 +1,14 @@
-   
 fetch(`http://${SERVER_IP}:${SERVER_PORT}/products`)
 .then(response => response.json())
 .then(data => data.data.forEach(element => {
         addProduct(element)
+        
+        let ip = getCookie("connection");
+        if(ip != "" && ip != "null") 
+          $("#status").attr("src", "Imagenes/green.png");
+
     })
 );
-
-function showPopup(){
-      $("#popup").modal();
-
-    let ip = getCookie("connection");
-
-    if(ip != "" && ip != "null") 
-      $("#status").attr("src", "Imagenes/green.png");
-  }
 
 function pairDevice(){
   // Complete code

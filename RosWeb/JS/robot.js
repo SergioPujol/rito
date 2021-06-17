@@ -18,8 +18,10 @@ function connect(ip) {
     }
     if (typeof ip === undefined || ip == "")
      data.rosbridge_address = 'ws://127.0.0.1:9090/'
-    else data.rosbridge_address = 'ws://' + ip + "/"
+    else data.rosbridge_address = 'ws://' + ip + ":9090/"
     $("#status").attr("src", "Imagenes/loading.gif");
+
+console.log(data.rosbridge_address)
 
     data.ros = new ROSLIB.Ros({
         url: data.rosbridge_address

@@ -29,6 +29,7 @@ grUsername.addEventListener("click", (e)=>{
     editButton.tipoInput = "username";
     modalTitle.innerHTML = "Cambia tu nombre de usuario"
     modalLabel.innerHTML = "Nombre de usuario:"
+    inputEdit.value = ""
     inputEdit.placeholder = perfil.user.username;
     console.log(perfil.user.username)
     $('#edit').modal()
@@ -38,6 +39,7 @@ grFullName.addEventListener("click", (e)=>{
     editButton.tipoInput = "full-name";
     modalTitle.innerHTML = "Cambia tu nombre"
     modalLabel.innerHTML = "Nombre:"
+    inputEdit.value = ""
     inputEdit.placeholder = perfil.user.name + " "+ perfil.user.surname;
     console.log(perfil.user.name + " "+ perfil.user.surname)
     $("#edit").modal()
@@ -47,6 +49,7 @@ grTelephone.addEventListener("click", (e)=>{
     editButton.tipoInput = "telephone";
     modalTitle.innerHTML = "Cambia tu número de teléfono:"
     modalLabel.innerHTML = "Número de teléfono:"
+    inputEdit.value = ""
     inputEdit.placeholder = perfil.user.telephone.toString();
     console.log(perfil.user.telephone.toString())
     $("#edit").modal()
@@ -56,6 +59,7 @@ grEmail.addEventListener("click", (e)=>{
     editButton.tipoInput = "email";
     modalTitle.innerHTML = "Cambia tu correo electrónico"
     modalLabel.innerHTML = "Correo:"
+    inputEdit.value = ""
     inputEdit.placeholder = perfil.user.email;
     console.log(perfil.user.email)
     $("#edit").modal()

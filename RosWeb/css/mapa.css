@@ -112,13 +112,21 @@ img{
     height: calc(100vh - 60px - 55px - 77px - 55px); /*Tamaño de la pantalla menos el menu superior, un margen + mitad robot, menu inferior y un margen + mitad del robot*/
 }
 
+#robot{
+    width: 50px;
+    height: 50px;
+    position: relative;
+    top: calc(100% - 50px);
+    left: calc(50% - 25px);
+}
+
+/*Peso*/
 #peso {
     display:flex;
     align-items: center;
-    position: fixed;
-    margin-top: 20px;
+    justify-content: flex-end;
+    margin-top: 15px;
     margin-right: 5px;
-    right: 0;
 }
 
 #label_peso {
@@ -128,17 +136,8 @@ img{
 #peso_{
     width: 40px;
     height: 40px;
-    position: relative;
-    top: calc(100% - 50px);
     margin-left: 5px;
-}
-
-#robot{
-    width: 50px;
-    height: 50px;
-    position: relative;
-    top: calc(100% - 50px);
-    left: calc(50% - 25px);
+    margin-bottom: 10px;
 }
 
 /*Carrito de la compra*/

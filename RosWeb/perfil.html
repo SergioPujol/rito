@@ -27,6 +27,10 @@
     <link rel="stylesheet" href="./css/global.css">
     <link rel="stylesheet" href="./css/perfil.css">
 
+    <!-- FEATHERS JS (Server) -->
+    <script src="//unpkg.com/feathers-client@^2.0.0/dist/feathers.js"></script>
+    <script src="//unpkg.com/socket.io-client@1.7.3/dist/socket.io.js"></script>
+
 </head>
 
 <body>
@@ -47,7 +51,7 @@
         </a>
         <a class="navbar-brand" href="./productos.html">
             <div>
-              <img src="./Imagenes/navigator.png" alt="">
+              <img src="./Imagenes/diet.png" alt="">
               <p>Productos</p>
             </div>
         </a>
@@ -69,25 +73,25 @@
 
     <!-- LISTAS -->
     <ul>
-        <li class="label white">
-            <h3>nnatxo</h3>
+        <li id="gr-username" class="label white">
+            <h3 id="username">...</h3>
             <h4>Editar nombre público</h4>
         </li>
-        <li class="label white">
-            <h3>Ignasi Mari Giner</h3>
+        <li id="gr-fullname" class="label white">
+            <h3 id="full-name">...</h3>
             <h4>Editar nombre</h4>
         </li>
-        <li class="label white">
-            <h3>637 322 562</h3>
+        <li id="gr-telephone" class="label white">
+            <h3 id="telephone">...</h3>
             <h4>Editar telefono de contacto</h4>
         </li>
-        <li class="label white">
-            <h3>Información de pago</h3>
-            <h4>Configurar información de pago</h4>
-        </li>
-        <li class="label white">
-            <h3>nnatxolmao@gmail.com</h3>
+        <li id="gr-email" class="label white">
+            <h3 id="email">...</h3>
             <h4>Editar correo de contacto</h4>
+        </li>
+        <li class="label grey">
+            <h3 id="payment-method">Información de pago</h3>
+            <h4>Configurar información de pago</h4>
         </li>
         <li class="label grey">
             <h3>Análisis de compra</h3>
@@ -99,6 +103,25 @@
         </li>
     </ul>
 
+    <!-- MODAL PERFIL -->
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h1 id="profile-modal-title" class="mb-4">Cambia tu usuario</h1>
+                    <div class="d-flex flex-row mb-3 align-items-center">
+                        <label id="profile-modal-label" class="m-1">Nombre: </label>
+                        <input id="inputEdit" type="text" placeholder="" class="w-75 m-1" />
+                    </div>
+                    <button type="button" tipoInput="" onclick="editField()" class="btn btn-outline-success">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./JS/const.js"></script>
+    <script src="./JS/login.js"></script>
+    <script src="./JS/perfil.js"></script>
 </body>
 
 </html>

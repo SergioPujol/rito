@@ -23,19 +23,20 @@ h5{
 body{
     width: 100%;
     background-image: url(../Imagenes/map.png);
+    background-color: var(--green);
     background-repeat: no-repeat;
     background-size: 100vw 100vh;
 }
 
 /*Elementos superiores*/
 #container{
-    width: 85%;
+    width: 90%;
     margin: 0 auto;
     justify-content: flex-end;
 }
 
 #container img{
-    margin-left: 10px;
+    margin-left: 20px;
     margin-top: 20px;
 }
 
@@ -109,6 +110,27 @@ img{
 #map{
     margin-top: 55px;
     height: calc(100vh - 60px - 55px - 77px - 55px); /*Tamaño de la pantalla menos el menu superior, un margen + mitad robot, menu inferior y un margen + mitad del robot*/
+}
+
+#peso {
+    display:flex;
+    align-items: center;
+    position: fixed;
+    margin-top: 20px;
+    margin-right: 5px;
+    right: 0;
+}
+
+#label_peso {
+    margin: 0;
+}
+
+#peso_{
+    width: 40px;
+    height: 40px;
+    position: relative;
+    top: calc(100% - 50px);
+    margin-left: 5px;
 }
 
 #robot{

@@ -129,9 +129,26 @@ async function startShopping(){
     
 }
 
+function setCamera(){
+	console.log("setting the camera")
+	let viewer1 = new MJPEGCANVAS.Viewer({
+	    divID: "divCamera", //elemento del html donde mostraremos la cámara
+	    host: "127.0.0.1:8080", //dirección del servidor de vídeo
+	    width: 320, //no pongas un tamaño mucho mayor porque puede dar error
+	    height: 240,
+	    topic: "/turtlebot3/camera/image_raw",
+	    ssl: false,
+	})
+}
+
 function getIPfromInput(){
     return document.getElementById('input_ip').value;
 }
+
+/**
+ * Connect to ROS
+ * @param {*} ip 
+ */
 function connect(ip) {
     console.log("L - " + ip)
     if (typeof ip === undefined || ip == "")
@@ -158,6 +175,7 @@ function connect(ip) {
     data.ros.on("connection", () => {
         data.connected = true
         console.log("Conexion con ROSBridge correcta")
+        setCamera()
         topic.subscribe((message) => {
             data.position = message.pose.pose.position
             topicCoords(data.position.x - 7, data.position.y + 2)
@@ -174,6 +192,7 @@ function connect(ip) {
     data.ros.on("close", () => {
         data.connected = false
         console.log("Conexion con ROSBridge cerrada")
+        document.getElementById("divCamera").innerHTML = ""
     })
 }
 

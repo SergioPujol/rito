@@ -4,7 +4,7 @@ if(ip != "" && ip != "null")
 
 function pairDevice(){
   // Complete code
-  //IP completa robot -> 172.18.224.94
+  //IP completa robot -> 172.18.224.94 || 192.168.1.72
   let ipA = parseInt("172").toString(16); // AC
   let ipB = parseInt("18").toString(16); // 12
   let val = $('#pin').val();

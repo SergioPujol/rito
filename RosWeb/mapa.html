@@ -20,6 +20,9 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
+        <script src="https://cdn.jsdelivr.net/npm/eventemitter2@5.0.1/lib/eventemitter2.min.js"></script>
+        <script src="JS/mjpegcanvas.min.js"></script>
+
     <!-- ROSLIB -->
     <script src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
 
@@ -76,6 +79,7 @@
     <!-- MENU SUPERIOR -->
     <div id="container" class="d-flex">
         <!-- CARRITO Y LISTAS -->
+        <img src="./Imagenes/robot.png" alt="" onclick="$('#scan').modal();">
         <img src="./Imagenes/clipboard.png" alt="" onclick="$('#shoppingList').modal();">
         <img src="./Imagenes/roboticv2.png" alt="" onclick="$('#cart').modal();">
     </div>
@@ -109,6 +113,30 @@
     <div id="peso">
         <p id="label_peso">1,28 Kg</p>
         <img src="./Imagenes/peso.png" id="peso_"></img>
+    </div>
+
+    <!-- CAMARA -->
+    <div class="col-md-12 text-center my-2">
+		<div id="divCamera">
+		</div>
+    </div>
+
+    <!-- MODAL SCAN -->
+    <div class="modal fade" id="scan" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body shopping">
+                    <h1>Escanea el producto</h1>
+                    <div class="col-md-12 text-center my-2">
+                        <div id="divCamera">
+                        </div>
+                    </div>
+                    <div onclick="scan()" class="d-flex justify-content-center label yellow">
+                        <h2>Empezar Compra</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- MODAL LISTA -->

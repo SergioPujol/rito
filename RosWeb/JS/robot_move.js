@@ -182,7 +182,7 @@ function connect(ip) {
         })
         topic2.subscribe((message) => {
             let res = message/375;
-            document.getElementById('label_peso').value = res
+            document.getElementById('label_peso').innerHTML = res
         })
     })
     data.ros.on("error", (error) => {

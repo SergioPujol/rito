@@ -10,6 +10,7 @@ from rito_state_machine_msg.srv import RitoServiceMessage, RitoServiceMessageRes
 #!/usr/bin/env python
 import rospy
 from rospy.core import NullHandler
+from rospy.names import resolve_name
 import smach
 import time
 from smach import State, StateMachine
@@ -19,9 +20,7 @@ import cv2
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
 import numpy as np
-from keras_preprocessing import image
-from keras_preprocessing.image import ImageDataGenerator
-import tensorflow as tf
+import boto3
 
 
 import actionlib
@@ -32,6 +31,27 @@ from collections import OrderedDict
 lista_tareas = []
 
 endedRoute = False
+scanned = False
+
+'''
+# Completa este objeto con tus credenciales
+awsSession = [
+    "ASIAWMD7VZ2ADCB5S3T2", # access key id 
+    "G3v9bLttt7JLPQFKEk2D6IV+ARYA+9tu5IZy1X0k", # secret access key
+    "IQoJb3JpZ2luX2VjENf//////////wEaCXVzLXdlc3QtMiJHMEUCIQCWgWHzoXEQ2kznbZtNnnEXteCV61QEyHtW8qh1NRP4YQIgP3pZbkgt9JdVpGxV+mWe4ttFXyQuxzssRE6CZUxe30IqrAIIcBAAGgw0MzgzNTQ0MzE2MTYiDHWBFGQmEuc9EvJvQCqJAq7ob4aYL2pB72jNBT6mVCicFFfHeJZoXaNsbb68YlKdxEGB/vL8gI6mWze509qKObWu51nPZcv8UW72i4vMjIJ4qCfloUIGL139NkgM4nZZS4Ry2/QWfiDHLBmopL7dIO9Q+Q3CSiR3w2AtnHLn6rBNmrUihSAA9OWhFlFYN6W4yyIQTaxjahmzQzxb09giLw8e0bZG4WNuIVWe8Z56wTVPpWMShWbzbBzWMbmnSKvU6KokWawRl8QsjqeY7Hl5025gKaGqMzMk6+AGq3vvGSagkdjqgUUWPSWj3mJu2XLVsiCMzDEh6Kl5ViuDOCb5gxO27eWiebRiqoBU7qrFuP2HD6b2LEpHssYw5uCShQY6nQGSxrZ1KcRzou579fKabzDKGaOEkY/8wUdB8zfID8U68+m6x6a5FkwM1lidsEVc6w0xdZwFh6fVxTPY8x9w1meZpVTdSGolkkzaFYWOmjRXROIAtjGvpmggeg3kDedMRQae0EaZVkutGv83vbtgsrdNE8+ymh2o5xWX38y1yMzwnrzKuJnINkSXckrI/5K9sQ3hlHB4sMmyclbVRmAx", # token
+    'us-east-1' # region
+]
+# Creamos la sesion de AWS con las credenciales
+session = boto3.Session(
+    aws_access_key_id=awsSession[0],
+    aws_secret_access_key=awsSession[1],
+    aws_session_token=awsSession[2],
+    region_name=awsSession[3])
+
+# Indicamos el cliente: comprehend
+
+rekognition = session.client(service_name='rekognition', region_name='us-east-1')'''
+
 
 ## Descripcion de los estados
 class PowerOnRobot(State):
@@ -179,15 +199,15 @@ class Scan(State):
         State.__init__(self, outcomes=['succeeded','aborted'], input_keys=['input'], output_keys=[''])
         print("init")
         self.bridge_object = CvBridge()
-        self.image_sub = rospy.Subscriber("/turtlebot3/camera/image_raw",Image, self.camera_callback)
-
-    def camera_callback(self,data):
-        self.data = data
 
     def execute(self, userdata):
         print("Escaneando producto...")
         cont = 0
-        while True:
+        while not scanned:
+            cont = cont + 1
+            if cont > 200:
+                return 'aborted'
+            '''
             if(self.data!=NullHandler):
                 try:
                     # Seleccionamos bgr8 porque es la codificacion de OpenCV por defecto
@@ -195,137 +215,34 @@ class Scan(State):
                 except CvBridgeError as e:
                     print(e)
 
-            redCheck = blueCheck = greenCheck = False
-
-            # Convert the imageFrame in 
-            # BGR(RGB color space) to 
-            # HSV(hue-saturation-value)
-            # color space
-            hsvFrame = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV)
-        
-            # Set range for red color and 
-            # define mask
-            red_lower = np.array([136, 87, 111], np.uint8)
-            red_upper = np.array([180, 255, 255], np.uint8)
-
-            lower_red = np.array([0,50,50])
-            upper_red = np.array([15,255,255])
-            red_mask = cv2.inRange(hsvFrame, lower_red, upper_red)
-        
-            # Set range for green color and 
-            # define mask
-            green_lower = np.array([25, 52, 72], np.uint8)
-            green_upper = np.array([102, 255, 255], np.uint8)
-            green_mask = cv2.inRange(hsvFrame, green_lower, green_upper)
-        
-            # Set range for blue color and
-            # define mask
-            blue_lower = np.array([94, 80, 2], np.uint8)
-            blue_upper = np.array([120, 255, 255], np.uint8)
-            blue_mask = cv2.inRange(hsvFrame, blue_lower, blue_upper)
+                client=boto3.client('rekognition')
             
-            # Morphological Transform, Dilation
-            # for each color and bitwise_and operator
-            # between imageFrame and mask determines
-            # to detect only that particular color
-            kernal = np.ones((5, 5), "uint8")
-            
-            # For red color
-            red_mask = cv2.dilate(red_mask, kernal)
-            
-            # For green color
-            green_mask = cv2.dilate(green_mask, kernal)
-            
-            # For blue color
-            blue_mask = cv2.dilate(blue_mask, kernal)
-        
-            # Creating contour to track red color
-            _, contours, _ = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-            
-            if(len(contours) > 0): redCheck = True
-            
-            '''
-            for pic, contour in enumerate(contours):
-                area = cv2.contourArea(contour)
-                if(area > 300):
-                    x, y, w, h = cv2.boundingRect(contour)
-                    imageFrame = cv2.rectangle(imageFrame, (x, y), 
-                                            (x + w, y + h), 
-                                            (0, 0, 255), 2)
+                with open(cv_image, 'rb') as image:
+                    response = client.detect_labels(Image={'Bytes': image.read()})
                     
-                    cv2.putText(imageFrame, "Red Colour", (x, y),
-                                cv2.FONT_HERSHEY_SIMPLEX, 1.0,
-                                (0, 0, 255))    
-        
-            '''
+                print('Detected labels in ' + cv_image)    
+                if(len(response['Labels']) > 0):
+                    return 'succeeded'
 
-            # Creating contour to track green color
-            _, contours, _ = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-            if(len(contours) > 0): greenCheck = True
-
-            '''
-            for pic, contour in enumerate(contours):
-                area = cv2.contourArea(contour)
-                if(area > 300):
-                    x, y, w, h = cv2.boundingRect(contour)
-                    imageFrame = cv2.rectangle(imageFrame, (x, y), 
-                                            (x + w, y + h),
-                                            (0, 255, 0), 2)
-                    
-                    cv2.putText(imageFrame, "Green Colour", (x, y),
-                                cv2.FONT_HERSHEY_SIMPLEX, 
-                                1.0, (0, 255, 0))
-            '''
-            # Creating contour to track blue color
-            _, contours, _ = cv2.findContours(blue_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-            if(len(contours) > 0): blueCheck = True
-
-            '''
-            for pic, contour in enumerate(contours):
-                area = cv2.contourArea(contour)
-                if(area > 300):
-                    x, y, w, h = cv2.boundingRect(contour)
-                    imageFrame = cv2.rectangle(imageFrame, (x, y),
-                                            (x + w, y + h),
-                                            (255, 0, 0), 2)
-                    
-                    cv2.putText(imageFrame, "Blue Colour", (x, y),
-                                cv2.FONT_HERSHEY_SIMPLEX,
-                                1.0, (255, 0, 0))
-            '''
-            if(redCheck):
-                print("Escaneado producto rojo")
-                endedRoute = True
-                return 'succeeded'
-
-            if(blueCheck):
-                print("Escaneado producto azul")
-                endedRoute = True 
-                return 'succeeded'
-                
-            if(greenCheck):
-                print("Escaneado producto verde")
-                endedRoute = True           
-                return 'succeeded'
-
-            print("Por favor, escanee el producto")
-            cont+=1 
-            if cont > 3:
-                break
-        
-        return 'aborted'
+                print("Por favor, escanee el producto")
+                cont+=1 
+                if cont > 3:
+                    break
+            else:
+                '''
+        return 'succeeded'
 
 waypoints_dict = {
     'carniceria' : {
         'tag': 'GO_TO_CARNICERIA',
-        'coord': (1.8, -0.8, 0.0),
+        'coord': (0.1, -0.1, 0.0), # 1.8, -0.8, 0.0
         'dir' : (0.0, 0.0, 1.0, 0.0),
         'class' : RecogerCarniceria(),
         'function' : 'RECOGER_CARNICERIA'
     },
     'pescaderia' : {
         'tag': 'GO_TO_PESCADERIA',
-        'coord': (1.8, 0.8, 0.0),
+        'coord': (-0.1, 0.1, 0.0), # 1.8, 0.8, 0.0
         'dir' : (0.0, 0.0, 1.0, 0.0),
         'class' : RecogerPescaderia(),
         'function' : 'RECOGER_PESCADERIA'
@@ -393,19 +310,27 @@ def shutdown():
     rospy.sleep(1)
 
 def my_callback(request): # Funcion que se ejecuta cuando se llama al servicio
-    rospy.loginfo("The service state machine has been called")
+    
     endedRoute = False
     spl = str(request).split()[1]
     res = spl[1:len(spl)-1]
     destinos = res.split(',')
     print(destinos)
-    lista_tareas = destinos
-    start_tasks(lista_tareas)
-
-    factura = len(destinos) * 4
-    response = RitoServiceMessageResponse()
-    response.success = True
-    response.bill = "Total: "+ str(factura)
+    
+    if "scan" in destinos:
+        rospy.loginfo("Scanned product")
+        scanned = True
+        response = RitoServiceMessageResponse()
+        response.success = True
+        response.bill = "Producto: "+ str(3)
+    else:
+        lista_tareas = destinos
+        rospy.loginfo("The service state machine has been called")
+        start_tasks(lista_tareas)
+        factura = len(destinos) * 4
+        response = RitoServiceMessageResponse()
+        response.success = True
+        response.bill = "Total: "+ str(factura)
     return response    
 
 rospy.init_node('rito_state_machine_service')  # se inicializa el nodo

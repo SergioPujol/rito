@@ -1,4 +1,4 @@
-const SERVER_IP = "192.168.1.72"
+const SERVER_IP = "172.18.224.114"
 const SERVER_PORT = "3030"
 
 function getCookie(cname) {

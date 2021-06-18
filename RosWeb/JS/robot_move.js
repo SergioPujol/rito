@@ -148,6 +148,12 @@ function connect(ip) {
         messageType: 'nav_msgs/Odometry'
     })
 
+    let topic2 = new ROSLIB.Topic({
+        ros: data.ros,
+        name: '/weight',
+        messageType: 'sensor_msgs/Range'
+    })
+
     // Define callbacks
     data.ros.on("connection", () => {
         data.connected = true
@@ -155,6 +161,10 @@ function connect(ip) {
         topic.subscribe((message) => {
             data.position = message.pose.pose.position
             topicCoords(data.position.x - 7, data.position.y + 2)
+        })
+        topic2.subscribe((message) => {
+            let res = message/375;
+            document.getElementById('label_peso').value = res
         })
     })
     data.ros.on("error", (error) => {

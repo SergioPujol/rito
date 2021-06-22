@@ -1,5 +1,5 @@
 <launch>
-    <arg name="map_file" default="$(find rito_navigation_stack)/maps/tb3_supermarket_map.yaml"/>
+    <arg name="map_file" default="$(find rito_navigation_stack_real)/maps/rito_supermarket.yaml.yaml"/>
     <node
         name="map_server"
         type="map_server"

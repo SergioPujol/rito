@@ -9,7 +9,6 @@ const renderLists = async()=>{
             let id = (element._id)
             let price = 0;
             
-            
             await Promise.all(element.products.map(async (i) => {
                 await fetch(`http://${SERVER_IP}:${SERVER_PORT}/products/${i.product}`)
                 .then(response => response.json())

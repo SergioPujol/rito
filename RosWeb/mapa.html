@@ -20,6 +20,9 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
+        <script src="https://cdn.jsdelivr.net/npm/eventemitter2@5.0.1/lib/eventemitter2.min.js"></script>
+        <script src="JS/mjpegcanvas.min.js"></script>
+
     <!-- ROSLIB -->
     <script src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
 
@@ -53,6 +56,12 @@
                 <p>Mapa</p>
             </div>
         </a>
+        <a class="navbar-brand" href="./productos.html">
+            <div>
+              <img src="./Imagenes/diet.png" alt="">
+              <p>Productos</p>
+            </div>
+        </a>
         <a class="navbar-brand" href="./listas.html">
             <div>
                 <img src="./Imagenes/clipboard.png" alt="">
@@ -69,17 +78,10 @@
 
     <!-- MENU SUPERIOR -->
     <div id="container" class="d-flex">
-        <!-- BUSCADOR -->
-        <nav class="search">
-            <div class="d-flex">
-                <button><i class="fa fa-search"></i></button></i>
-                <input type="text" placeholder="Buscar producto..." name="search">
-            </div>
-        </nav>
-
         <!-- CARRITO Y LISTAS -->
+        <img src="./Imagenes/robot.png" alt="" onclick="$('#scan').modal();">
         <img src="./Imagenes/clipboard.png" alt="" onclick="$('#shoppingList').modal();">
-        <img src="./Imagenes/cancel.png" alt="" onclick="$('#cart').modal();">
+        <img src="./Imagenes/roboticv2.png" alt="" onclick="$('#cart').modal();">
     </div>
 
     <!-- IMAGENES -->
@@ -102,16 +104,39 @@
         <img src="./Imagenes/pescaderia.png" alt="">
     </div>
 
-    <!-- PONER IP (SE BORRARA EN EL PROXIMO SPRINT) -->
-    <div style="position: fixed;bottom: 80px;" class="d-flex">
-        <input type="text" id="input_ip">
-        <button id="btn_con" onclick="connect(document.getElementById('input_ip').value)">Conectar</button>
-        <button id="btn_dis" onclick="disconnect()">Desconectar</button>
-    </div>
-
     <!-- ROBOT -->
     <div id="map">
-        <img src="./Imagenes/robotic.png" id="robot"></img>
+        <img src="./Imagenes/robot.png" id="robot"></img>
+    </div>
+
+    <!-- PESO -->
+    <div id="peso">
+        <p id="label_peso">1,28 Kg</p>
+        <img src="./Imagenes/peso.png" id="peso_"></img>
+    </div>
+
+    <!-- CAMARA -->
+    <div class="col-md-12 text-center my-2">
+		<div id="divCamera">
+		</div>
+    </div>
+
+    <!-- MODAL SCAN -->
+    <div class="modal fade" id="scan" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body shopping">
+                    <h1>Escanea el producto</h1>
+                    <div class="col-md-12 text-center my-2">
+                        <div id="divCamera">
+                        </div>
+                    </div>
+                    <div onclick="scan()" class="d-flex justify-content-center label yellow">
+                        <h2>Empezar Compra</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- MODAL LISTA -->
@@ -121,28 +146,6 @@
                 <div class="modal-body shopping">
                     <h1>Selecciona tu lista de la compra</h1>
                     <ul id="list-list">
-                        <!--
-                        <li class="form-check">
-                            <input class="form-check-input" type="checkbox" id="paella">
-                            <label class="form-check-label" for="paella">Para paella</label>
-                        </li>
-                        <li class="form-check">
-                            <input class="form-check-input" type="checkbox" id="puchero">
-                            <label class="form-check-label" for="puchero">Puchero de la abuela</label>
-                        </li>
-                        <li class="form-check">
-                            <input class="form-check-input" type="checkbox" id="pizza">
-                            <label class="form-check-label" for="pizza">Pizza</label>
-                        </li>
-                        <li class="form-check">
-                            <input class="form-check-input" type="checkbox" id="compra">
-                            <label class="form-check-label" for="compra">Compra general</label>
-                        </li>
-                        <li class="form-check">
-                            <input class="form-check-input" type="checkbox" id="compra">
-                            <label class="form-check-label" for="compra">Compra general</label>
-                        </li>
-                        -->
                     </ul>
                     <div onclick="startShopping()" class="d-flex justify-content-center label yellow">
                         <h2>Empezar Compra</h2>
@@ -158,45 +161,17 @@
             <div class="modal-content">
                 <div class="modal-body cart">
                     <h1>Carrito de la compra</h1>
-                    <h3>2 productos</h3>
+                    <h3 id="productos">x productos</h3>
                     <hr>
-                    <ul>
-                        <li class="d-flex align-items-center product-list">
-                            <div class="col-4">
-                                <img src="" alt="">
-                            </div>
-                            <article class="col-8">
-                                <h4>Pasta Donna Vera</h4>
-                                <h5>450g</h5>
-                                <div class="d-flex product-price">
-                                    <h5>1 x</h5>
-                                    <h5>2.96€</h5>
-                                </div>
-                            </article>
-                        </li>
-                        <hr>
-                        <li class="d-flex align-items-center product-list">
-                            <div class="col-4">
-                                <img src="" alt="">
-                            </div>
-                            <article class="col-8">
-                                <h4>Pasta Donna Vera</h4>
-                                <h5>450g</h5>
-                                <div class="d-flex product-price">
-                                    <h5>1 x</h5>
-                                    <h5>2.96€</h5>
-                                </div>
-                            </article>
-                        </li>
-                        <hr>
+                    <ul id="cart-list">
                     </ul>
                     <div class="d-flex justify-content-end">
                         <article class="col-8 d-flex justify-content-between">
                             <h5>Total</h5>
-                            <h4>79.01€</h4>
+                            <h4 id="precio">x€</h4>
                         </article>
                     </div>
-                    <div class="d-flex justify-content-center label yellow">
+                    <div class="d-flex justify-content-center label yellow" onclick="$('#cart').modal('hide')">
                         <h2>Finalizar compra</h2>
                     </div>
                 </div>
@@ -205,9 +180,10 @@
     </div>
 
     <!-- JS -->
-    
     <script src="./JS/login.js"></script>
     <script src="./JS/robot_move.js"></script>
+    <script src="./JS/carrito.js"></script>
+
 </body>
 
 </html>

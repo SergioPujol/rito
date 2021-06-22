@@ -23,18 +23,20 @@ h5{
 body{
     width: 100%;
     background-image: url(../Imagenes/map.png);
+    background-color: var(--green);
     background-repeat: no-repeat;
     background-size: 100vw 100vh;
 }
 
 /*Elementos superiores*/
 #container{
-    width: 85%;
+    width: 90%;
     margin: 0 auto;
-    justify-content: space-evenly;
+    justify-content: flex-end;
 }
 
 #container img{
+    margin-left: 20px;
     margin-top: 20px;
 }
 
@@ -116,6 +118,26 @@ img{
     position: relative;
     top: calc(100% - 50px);
     left: calc(50% - 25px);
+}
+
+/*Peso*/
+#peso {
+    display:flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 15px;
+    margin-right: 5px;
+}
+
+#label_peso {
+    margin: 0;
+}
+
+#peso_{
+    width: 40px;
+    height: 40px;
+    margin-left: 5px;
+    margin-bottom: 10px;
 }
 
 /*Carrito de la compra*/

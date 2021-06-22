@@ -30,7 +30,9 @@
   <!-- JS -->
   <script src="./JS/search.js"></script>
   <script src="./JS/const.js"></script>
-  
+
+  <!-- RosLIB -->
+  <script src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
 
   <!-- FEATHERS JS (Server) -->
   <script src="//unpkg.com/feathers-client@^2.0.0/dist/feathers.js"></script>
@@ -54,6 +56,12 @@
         <p>Mapa</p>
       </div>
     </a>
+    <a class="navbar-brand" href="./productos.html">
+      <div>
+        <img src="./Imagenes/diet.png" alt="">
+        <p>Productos</p>
+      </div>
+    </a>
     <a class="navbar-brand" href="./listas.html">
       <div>
         <img src="./Imagenes/clipboard.png" alt="">
@@ -75,6 +83,18 @@
       <input type="text" placeholder="Buscar producto..." name="search" oninput="search(this.value)">
     </div>
   </nav>
+
+  <!-- VINCULAR  -->
+  <section>
+    <h1>Conecte su dispositivo</h1>
+    <div class="d-flex align-items-center label green">
+      <div class="col-4">
+        <div class="circle"><img src="Imagenes/carrito.png" alt="carrito" height="45" width="45" /></div>
+      </div>
+      <button type="button" onclick="$('#modalPin').modal();" class="btn btn-outline-success white">Vincular
+        carrito</button>
+    </div>
+  </section>
 
   <!-- PLANIFICADOR COMPRA -->
   <section>
@@ -104,63 +124,34 @@
   <section>
     <div class="d-flex">
       <h1>Productos destacados</h1>
-      <a href="#">Ver todos</a>
+      <a href="./productos.html">Ver todos</a>
     </div>
     <ul id="product-list">
-      <!-- 
-      <li class="align-items-center product-list" data-toggle="Pasta Donna Vera">
-        <div class="row">
-          <div class="col-4">
-            <img src="" alt="">
-          </div>
-          <article class="col-8">
-            <h3>Pasta Donna Vera</h3>
-            <div class="d-flex product-price">
-              <h5>450g</h5>
-              <h3>8.45€</h3>
-            </div>
-            <button type="button" href="#" class="btn btn-outline-success">AÑADIR A LA LISTA DE LA COMPRA</button>
-          </article>
-        </div>
-        <hr>
-      </li>
-      <li class="align-items-center product-list" data-toggle="Nocilla 2 sabores">
-        <div class="row">
-          <div class="col-4">
-            <img src="" alt="">
-          </div>
-          <article class="col-8">
-            <h3>Nocilla 2 sabores</h3>
-            <div class="d-flex product-price">
-              <h5>450g</h5>
-              <h3>3.15€</h3>
-            </div>
-            <button type="button" href="#" class="btn btn-outline-success">AÑADIR A LA LISTA DE LA COMPRA</button>
-          </article>
-        </div>
-        <hr>
-      </li>
-      <li class="align-items-center product-list" data-toggle="Nocilla mini">
-        <div class="row">
-          <div class="col-4">
-            <img src="" alt="">
-          </div>
-          <article class="col-8">
-            <h3>Nocilla mini</h3>
-            <div class="d-flex product-price">
-              <h5>200g</h5>
-              <h3>2.05€</h3>
-            </div>
-            <button type="button" href="#" class="btn btn-outline-success">AÑADIR A LA LISTA DE LA COMPRA</button>
-          </article>
-        </div>
-      </li>
-      -->
     </ul>
   </section>
 
+  <!-- POPUP VINCULACIÓN -->
+  <div class="modal fade" id="modalPin" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h1 class="mb-4">Introduzca el pin del carrito</h1>
+          <div class="d-flex flex-row mb-3 align-items-center">
+            <label for="pin" class="m-1">PIN: </label>
+            <input type="text" id="pin" name="pin" placeholder="0000" maxlength="4" class="w-75 m-1" />
+            <img src="Imagenes/red.png" class="m-1" alt="Verificacion" id="status" height="25" width="25">
+          </div>
+          <button type="button" onclick="pairDevice()" class="btn btn-outline-success">Enlazar</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./JS/robot.js"></script>
   <script src="./JS/index.js"></script>
   <script src="./JS/login.js"></script>
+  <script src="./JS/productos.js"></script>
 </body>
 
 </html>

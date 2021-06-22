@@ -1,5 +1,3 @@
-
-
 const screenWidth= window.innerWidth
 const screenHeight= document.getElementById("map").clientHeight;
 const robotSize = 25
@@ -7,30 +5,41 @@ const mapLength= {x: 9.2, y: 9.2}
 
 const robot= document.getElementById("robot")
 
+var ipReady = false
+
 document.addEventListener('DOMContentLoaded', event => {
     login().then((a)=>{console.log(a);getList()});
 
     jail = false;// define the service to be called
 
-    data = {
-        // ros connection
-        ros: null,
-        rosbridge_address: 'ws://127.0.0.1:9090/',
-        connected:  false,
-        // action information
-        goal: null,
-        action : {
-            goal: {position: {x: 0, y: 0} },
-            feedback: { 
-            position:  {x: 0, y: 0},
-                state: ''
-            },
-            result: {success: false},
-            status: {status: 0, text: ''},
-        }    
+    let ip = getCookie("connection");
+
+    if(ip != undefined) ipReady = true
+
+    console.log(ip)
+
+    if(ipReady){
+        data = {
+            // ros connection
+            ros: null,
+            rosbridge_address: 'ws://' + ip + "/",
+            connected:  false,
+            // action information
+            goal: null,
+            action : {
+                goal: {position: {x: 0, y: 0} },
+                feedback: { 
+                position:  {x: 0, y: 0},
+                    state: ''
+                },
+                result: {success: false},
+                status: {status: 0, text: ''},
+            }    
+        }
+        connect(ip)
     }
-    //connect()
 })
+
 async function getList(){
     const listsService = feathersClient.service('lists')
     let userShoppingLists = await listsService.find();
@@ -120,13 +129,31 @@ async function startShopping(){
     
 }
 
+function setCamera(){
+	console.log("setting the camera")
+	let viewer1 = new MJPEGCANVAS.Viewer({
+	    divID: "divCamera", //elemento del html donde mostraremos la cámara
+	    host: "127.0.0.1:8080", //dirección del servidor de vídeo
+	    width: 320, //no pongas un tamaño mucho mayor porque puede dar error
+	    height: 240,
+	    topic: "/turtlebot3/camera/image_raw",
+	    ssl: false,
+	})
+}
+
 function getIPfromInput(){
     return document.getElementById('input_ip').value;
 }
+
+/**
+ * Connect to ROS
+ * @param {*} ip 
+ */
 function connect(ip) {
+    console.log("L - " + ip)
     if (typeof ip === undefined || ip == "")
      data.rosbridge_address = 'ws://127.0.0.1:9090/'
-    else data.rosbridge_address = 'ws://' + ip + "/"
+    else data.rosbridge_address = 'ws://' + ip + ":9090/"
 
     data.ros = new ROSLIB.Ros({
         url: data.rosbridge_address
@@ -138,13 +165,24 @@ function connect(ip) {
         messageType: 'nav_msgs/Odometry'
     })
 
+    let topic2 = new ROSLIB.Topic({
+        ros: data.ros,
+        name: '/weight',
+        messageType: 'sensor_msgs/Range'
+    })
+
     // Define callbacks
     data.ros.on("connection", () => {
         data.connected = true
         console.log("Conexion con ROSBridge correcta")
+        setCamera()
         topic.subscribe((message) => {
             data.position = message.pose.pose.position
             topicCoords(data.position.x - 7, data.position.y + 2)
+        })
+        topic2.subscribe((message) => {
+            let res = message/375;
+            document.getElementById('label_peso').innerHTML = res
         })
     })
     data.ros.on("error", (error) => {
@@ -154,6 +192,7 @@ function connect(ip) {
     data.ros.on("close", () => {
         data.connected = false
         console.log("Conexion con ROSBridge cerrada")
+        document.getElementById("divCamera").innerHTML = ""
     })
 }
 

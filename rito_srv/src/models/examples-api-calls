@@ -48,14 +48,14 @@ ejemplo query
 POST /ritos
 {
 "ip_local":"192.168.1.13",
-"supermercado":"Mercadona Gandia Playa"
+"supermarket":"Mercadona Gandia Playa"
 }
 
 
 POST /cart 
 {
-"rito":"60ad396c536c352224d1be33",
-"user":"60ad021c87666e57dc90c50e",
+"rito":"60cba8f51544d610dc2bd12d",
+"user":"60aefa3de9c96338878fe2e4",
 "products":[{"product":"60ad0d8ba295a6594819028e", "quantity": 2, "in_cart":false}],
 "paid":false
 }
